@@ -169,9 +169,9 @@ function App() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-6xl font-bold mb-6 leading-tight">
-              Soluciones de
+              Soluciones para
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">
-                Transformación Digital de tu empresa
+               La transformación Digital de tu empresa
               </span>
             </h1>
             <p className="text-xl mb-8 text-blue-100">En <b>DataDriven Decisions</b>, no creemos en la intuición sin fundamento. Creemos en el poder de los datos para transformar negocios, desafiar lo establecido y tomar decisiones con impacto real.</p>
