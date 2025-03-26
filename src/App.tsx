@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+
 import { 
   LineChart, 
   BarChart3, 
@@ -11,9 +12,60 @@ import {
   MessageSquare,
   ChevronRight,
   Users,
+  Settings,
+  Zap,
+  Briefcase,
+  Compass,
   Lightbulb,
   ArrowRight
 } from 'lucide-react';
+const services = [
+  {
+    icon: <Compass className="w-10 h-10 text-blue-600" />,
+    title: "Diagnóstico y Estrategia Digital",
+    items: [
+      { title: "Assessment Digital", desc: "Evaluación del nivel de madurez digital de la empresa." },
+      { title: "Roadmap de Transformación Digital", desc: "Diseño de una hoja de ruta con prioridades, objetivos y soluciones." },
+      { title: "Benchmarking", desc: "Análisis de la competencia y tendencias del sector para definir estrategias innovadoras." }
+    ]
+  },
+  {
+    icon: <BarChart3 className="w-10 h-10 text-blue-600" />,
+    title: "Business Intelligence y Analítica",
+    items: [
+      { title: "Implementación de plataformas de BI", desc: "Optimización de sistemas para extraer valor de los datos." },
+      { title: "Cuadros de mando avanzados", desc: "Reportes visuales para facilitar la toma de decisiones." },
+      { title: "Integración de datos", desc: "Consolidación desde múltiples fuentes en tiempo real." }
+    ]
+  },
+  {
+    icon: <Settings className="w-10 h-10 text-blue-600" />,
+    title: "Automatización de Procesos",
+    items: [
+      { title: "Automatización con RPA", desc: "Eliminamos tareas repetitivas con robots digitales." },
+      { title: "Optimización de flujos de trabajo", desc: "Mejoramos la eficiencia con herramientas digitales." },
+      { title: "Gobierno de datos", desc: "Garantizamos calidad, gestión y seguridad de la información." }
+    ]
+  },
+  {
+    icon: <Zap className="w-10 h-10 text-blue-600" />,
+    title: "Innovación y Digitalización",
+    items: [
+      { title: "Consultoría en modelos digitales", desc: "Adaptamos negocios a la era digital." },
+      { title: "Implementación de CRM y ERP", desc: "Digitalizamos procesos con herramientas eficientes." },
+      { title: "IA y Machine Learning", desc: "Usamos datos para predicción y optimización." }
+    ]
+  },
+  {
+    icon: <Users className="w-10 h-10 text-blue-600" />,
+    title: "Capacitación y Change Management",
+    items: [
+      { title: "Formación en cultura digital", desc: "Capacitamos equipos para la transformación digital." },
+      { title: "Gestión del cambio", desc: "Estrategias para una adopción efectiva de tecnología." },
+      { title: "Coaching para líderes", desc: "Guiamos a directivos en el proceso de cambio." }
+    ]
+  }
+];
 
 function App() {
   const [formData, setFormData] = useState({
@@ -89,8 +141,9 @@ function App() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <LineChart className="w-8 h-8" />
-            <span className="text-xl font-bold">DataTech Consulting</span>
+           <img src="/src/assets/img/D3.png" alt="DataDriven Decisions" className="w-12 h-12" />
+           <span className="text-xl font-bold">DataDriven Decisions</span>
+
           </motion.div>
           <motion.div 
             className="hidden md:flex space-x-8"
@@ -100,7 +153,7 @@ function App() {
           >
             <a href="#about" className="hover:text-blue-200 transition-colors">Nosotros</a>
             <a href="#services" className="hover:text-blue-200 transition-colors">Servicios</a>
-            <a href="#projects" className="hover:text-blue-200 transition-colors">Proyectos</a>
+           {/* <a href="#projects" className="hover:text-blue-200 transition-colors">Proyectos</a> */}
             <a href="#contact" className="hover:text-blue-200 transition-colors">Contacto</a>
           </motion.div>
         </nav>
@@ -118,10 +171,10 @@ function App() {
             <h1 className="text-6xl font-bold mb-6 leading-tight">
               Soluciones de
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">
-                Transformación Digital
+                Transformación Digital de tu empresa
               </span>
             </h1>
-            <p className="text-xl mb-8 text-blue-100">Servicios de consultoría e implementación estratégica para tu viaje digital. Especialistas en BI, Soluciones Personalizadas y Análisis de Datos.</p>
+            <p className="text-xl mb-8 text-blue-100">En <b>DataDriven Decisions</b>, no creemos en la intuición sin fundamento. Creemos en el poder de los datos para transformar negocios, desafiar lo establecido y tomar decisiones con impacto real.</p>
             <motion.a
               href="#contact"
               className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition duration-300 inline-flex items-center"
@@ -137,169 +190,181 @@ function App() {
 
       {/* Sección Nosotros */}
       <section id="about" className="py-20">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            className="text-3xl font-bold text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Quiénes Somos
-          </motion.h2>
-          <motion.div 
-            className="grid md:grid-cols-3 gap-12"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                icon: <Users className="w-8 h-8 text-blue-600" />,
-                title: "Equipo Experto",
-                description: "Profesionales con años de experiencia en la industria"
-              },
-              {
-                icon: <Lightbulb className="w-8 h-8 text-blue-600" />,
-                title: "Soluciones Innovadoras",
-                description: "Enfoques de vanguardia para la transformación digital"
-              },
-              {
-                icon: <Brain className="w-8 h-8 text-blue-600" />,
-                title: "Pensamiento Estratégico",
-                description: "Estrategias basadas en datos para el crecimiento empresarial"
-              }
-            ].map((item, index) => (
-              <motion.div 
-                key={index}
-                className="text-center"
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transform transition-transform hover:rotate-12">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+  <div className="container mx-auto px-6">
+    <motion.h2
+      className="text-3xl font-bold text-center mb-6"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Quiénes Somos
+    </motion.h2>
+
+    <motion.p
+      className="text-lg text-center text-gray-700 max-w-3xl mx-auto mb-12"
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Somos una consultora IT especializada en <b>Transformación Digital y Business Intelligence</b>. 
+      Ayudamos a empresas a convertir el caos de la información en estrategias accionables, 
+      optimizando procesos y maximizando el valor de cada dato.
+      <br />
+      Nuestro enfoque es disruptivo: <b>rompemos paradigmas, eliminamos la incertidumbre y 
+      ponemos a los datos en el centro de la toma de decisiones</b>.
+    </motion.p>
+
+    <motion.div
+      className="grid md:grid-cols-3 gap-12"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {[
+        {
+          icon: <Users className="w-8 h-8 text-blue-600" />,
+          title: "Equipo Experto",
+          description: "Nuestro equipo no solo domina BI y transformación digital, sino que sabe cómo convertir datos en decisiones que impactan.",
+        },
+        {
+          icon: <Lightbulb className="w-8 h-8 text-blue-600" />,
+          title: "Soluciones Innovadoras",
+          description: "Diseñamos estrategias y herramientas adaptadas a la realidad y necesidades específicas de cada negocio.",
+        },
+        {
+          icon: <Brain className="w-8 h-8 text-blue-600" />,
+          title: "Pensamiento Estratégico",
+          description: "Rompemos con lo convencional. Transformamos datos en decisiones poderosas que redefinen el juego.",
+        },
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          className="text-center"
+          variants={fadeInUp}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transform transition-transform hover:rotate-12">
+            {item.icon}
+          </div>
+          <h3 className="text-xl font-semibold mb-4">{item.title}</h3>
+          <p className="text-gray-600">{item.description}</p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section>
+
 
       {/* Sección Servicios */}
       <section id="services" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            className="text-3xl font-bold text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Nuestros Servicios
-          </motion.h2>
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                icon: <BarChart3 className="w-12 h-12 text-blue-600 mb-6" />,
-                title: "Business Intelligence",
-                description: "Transformamos tus datos en información accionable con nuestras soluciones integrales de BI."
-              },
-              {
-                icon: <Database className="w-12 h-12 text-blue-600 mb-6" />,
-                title: "Soluciones a Medida",
-                description: "Implementación personalizada de soluciones digitales adaptadas a tus necesidades específicas."
-              },
-              {
-                icon: <LineChart className="w-12 h-12 text-blue-600 mb-6" />,
-                title: "Análisis de Datos",
-                description: "Análisis avanzado y visualización para impulsar mejores decisiones empresariales."
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
-                variants={fadeInUp}
-                whileHover={{ y: -10 }}
-              >
-                {service.icon}
-                <h3 className="text-xl font-semibold mb-4">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <motion.a
-                  href="#contact"
-                  className="text-blue-600 font-semibold inline-flex items-center"
-                  whileHover={{ x: 10 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  Saber Más <ArrowRight className="ml-2 w-4 h-4" />
-                </motion.a>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      <div className="container mx-auto px-6">
+        <motion.h2
+          className="text-3xl font-bold text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Nuestros Servicios
+        </motion.h2>
 
-      {/* Sección Proyectos */}
-      <section id="projects" className="py-20">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            className="text-3xl font-bold text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Casos de Éxito
-          </motion.h2>
-          <motion.div 
-            className="grid md:grid-cols-2 gap-8"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                title: "Análisis para Servicios Financieros",
-                description: "Implementación de solución BI integral resultando en 40% de mejora en la eficiencia de toma de decisiones."
-              },
-              {
-                image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                title: "Transformación Digital Retail",
-                description: "Transformación digital completa que logró un aumento del 65% en el engagement de clientes online."
-              }
-            ].map((project, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-lg"
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative overflow-hidden">
-                  <motion.img 
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">{project.title}</h3>
-                  <p className="text-gray-600">{project.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
+              <div className="flex items-center space-x-3 mb-4">
+                {service.icon}
+                <h3 className="text-xl font-semibold text-gray-900">{service.title}</h3>
+              </div>
+              <ul className="list-none space-y-2 text-gray-700">
+                {service.items.map((item, i) => (
+                  <li key={i} className="flex items-start space-x-2">
+                    <span className="text-blue-500">•</span>
+                    <div>
+                      <p className="font-medium">{item.title}</p>
+                      <p className="text-sm">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+
+     {/* 
+  Sección Proyectos - Casos de Éxito 
+  Comentado temporalmente 
+*/}
+
+{/* 
+<section id="projects" className="py-20">
+  <div className="container mx-auto px-6">
+    <motion.h2 
+      className="text-3xl font-bold text-center mb-16"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
+      Casos de Éxito
+    </motion.h2>
+    <motion.div 
+      className="grid md:grid-cols-2 gap-8"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+    >
+      {[
+        {
+          image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+          title: "Análisis para Servicios Financieros",
+          description: "Implementación de solución BI integral resultando en 40% de mejora en la eficiencia de toma de decisiones."
+        },
+        {
+          image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+          title: "Transformación Digital Retail",
+          description: "Transformación digital completa que logró un aumento del 65% en el engagement de clientes online."
+        }
+      ].map((project, index) => (
+        <motion.div
+          key={index}
+          className="bg-white rounded-lg overflow-hidden shadow-lg"
+          variants={fadeInUp}
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="relative overflow-hidden">
+            <motion.img 
+              src={project.image}
+              alt={project.title}
+              className="w-full h-48 object-cover transform hover:scale-110 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+          </div>
+          <div className="p-6">
+            <h3 className="text-xl font-semibold mb-4">{project.title}</h3>
+            <p className="text-gray-600">{project.description}</p>
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+  </div>
+</section> 
+*/}
+
 
       {/* Sección Contacto */}
       <section id="contact" className="py-20 bg-gray-50">
@@ -411,9 +476,9 @@ function App() {
             whileHover={{ scale: 1.05 }}
           >
             <LineChart className="w-6 h-6" />
-            <span className="text-lg font-bold">DataTech Consulting</span>
+            <span className="text-lg font-bold">DataDriven Decisions</span>
           </motion.div>
-          <p className="text-gray-400">© 2024 DataTech Consulting. Todos los derechos reservados.</p>
+          <p className="text-gray-400">© 2025 DataDriven Decisions. Todos los derechos reservados.</p>
         </motion.div>
       </footer>
     </div>
