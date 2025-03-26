@@ -141,7 +141,7 @@ function App() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-           <img src="/src/assets/img/D3.png" alt="DataDriven Decisions" className="w-12 h-12" />
+           <img src="https://fotoporfolio.s3.us-east-1.amazonaws.com/DDD_1__1_-removebg-preview.png" alt="DataDriven Decisions" className="w-12 h-12" />
            <span className="text-xl font-bold">DataDriven Decisions</span>
 
           </motion.div>
