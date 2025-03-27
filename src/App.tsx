@@ -80,7 +80,9 @@ function App() {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
-
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
@@ -101,11 +103,37 @@ function App() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:contacto@datadrivendecisions.com.ar?subject=Nueva Solicitud de Contacto&body=Nombre: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AMensaje: ${formData.message}`;
-  };
 
+    // Reseteamos los mensajes de error y éxito al iniciar el envío
+    setSuccessMessage(null);
+    setErrorMessage(null);
+    setLoading(true);
+
+    const templateParams = {
+      name: formData.name,
+      email: formData.email, // Email del usuario que llena el formulario
+      message: formData.message,
+    };
+
+    emailjs.send(
+      "service_ek89afh",  // Reemplaza con tu SERVICE_ID de EmailJS
+      "template_caqu97g", // Reemplaza con tu TEMPLATE_ID de EmailJS
+      templateParams,
+      "FK5BIh40_D_93Of4y" // Reemplaza con tu Public Key de EmailJS
+    )
+    .then(() => {
+      setLoading(false);
+      setSuccessMessage("Correo enviado correctamente, te responderemos a la brevedad");
+      setFormData({ name: "", email: "", message: "" });
+    })
+    .catch((error) => {
+      setLoading(false);
+      setErrorMessage("Error al enviar el correo");
+      console.error(error);
+    });
+  };
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white overflow-hidden">
       {/* Progress Bar */}
@@ -171,12 +199,13 @@ function App() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-6xl font-bold mb-6 leading-tight">
-              Soluciones para
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">
-               La transformación Digital de tu empresa
-              </span>
-            </h1>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-snug text-center sm:text-left">
+  Soluciones para
+  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">
+    La transformación Digital de tu empresa
+  </span>
+</h1>
+
             <p className="text-xl mb-8 text-blue-100">En <b>DataDriven Decisions</b>, no creemos en la intuición sin fundamento. Creemos en el poder de los datos para transformar negocios, desafiar lo establecido y tomar decisiones con impacto real.</p>
             <motion.a
               href="#contact"
@@ -371,88 +400,92 @@ function App() {
 
       {/* Sección Contacto */}
       <section id="contact" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6">
-          <motion.h2 
-            className="text-3xl font-bold text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            Contáctanos
-          </motion.h2>
+      <div className="container mx-auto px-6">
+        <motion.h2 
+          className="text-3xl font-bold text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Contáctanos
+        </motion.h2>
+        <motion.div 
+          className="max-w-3xl mx-auto"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <motion.div 
-            className="max-w-3xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-8 mb-12"
+            variants={fadeInUp}
           >
-            <motion.div 
-              className="grid md:grid-cols-2 gap-8 mb-12"
-              variants={fadeInUp}
-            >
-              <div className="flex items-center space-x-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Mail className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">contacto@datadrivendecisions.com.ar</p>
-                </div>
+            <div className="flex items-center space-x-4">
+              <div className="bg-blue-100 p-3 rounded-full">
+                <Mail className="w-6 h-6 text-blue-600" />
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="bg-blue-100 p-3 rounded-full">
-                  <Phone className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">Teléfono</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
-                </div>
+              <div>
+                <h3 className="font-semibold">Email</h3>
+                <p className="text-gray-600">contacto@datadrivendecisions.com.ar</p>
               </div>
-            </motion.div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="bg-blue-100 p-3 rounded-full">
+                <Phone className="w-6 h-6 text-blue-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold">Teléfono</h3>
+                <p className="text-gray-600">+1 (555) 123-4567</p>
+              </div>
+            </div>
+          </motion.div>
 
-            <motion.form 
-              onSubmit={handleSubmit} 
-              className="space-y-6"
-              variants={fadeInUp}
-            >
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                <motion.input
-                  whileFocus={{ scale: 1.01 }}
-                  type="text"
-                  id="name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <motion.input
-                  whileFocus={{ scale: 1.01 }}
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
-                <motion.textarea
-                  whileFocus={{ scale: 1.01 }}
-                  id="message"
-                  rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({...formData, message: e.target.value})}
-                ></motion.textarea>
-              </div>
-              <div>
+          <motion.form 
+            onSubmit={handleSubmit} 
+            className="space-y-6"
+            variants={fadeInUp}
+          >
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+              <motion.input
+                whileFocus={{ scale: 1.01 }}
+                type="text"
+                id="name"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({...formData, name: e.target.value})}
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <motion.input
+                whileFocus={{ scale: 1.01 }}
+                type="email"
+                id="email"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mensaje</label>
+              <motion.textarea
+                whileFocus={{ scale: 1.01 }}
+                id="message"
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                required
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+              ></motion.textarea>
+            </div>
+            <div>
+              {loading ? (
+                <div className="text-center py-4">Enviando...</div>
+                // Puedes agregar un spinner aquí si quieres algo visual
+              ) : (
                 <motion.button
                   type="submit"
                   className="w-full bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
@@ -461,11 +494,24 @@ function App() {
                 >
                   Enviar Mensaje
                 </motion.button>
-              </div>
-            </motion.form>
-          </motion.div>
-        </div>
-      </section>
+              )}
+            </div>
+          </motion.form>
+
+          {/* Mensaje de éxito o error */}
+          {successMessage && (
+            <div className="text-green-600 text-center mt-4">
+              {successMessage}
+            </div>
+          )}
+          {errorMessage && (
+            <div className="text-red-600 text-center mt-4">
+              {errorMessage}
+            </div>
+          )}
+        </motion.div>
+      </div>
+    </section>
 
       <footer className="bg-gray-900 text-white py-8">
         <motion.div 
