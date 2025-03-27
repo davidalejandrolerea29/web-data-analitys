@@ -142,19 +142,30 @@ function App() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      {/* Botón flotante de WhatsApp */}
-      <motion.a
-        href="https://wa.me/15551234567"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg z-50 hover:bg-green-600 transition-colors duration-300"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <MessageSquare className="w-6 h-6" />
-      </motion.a>
+     {/* Botón flotante de WhatsApp */}
+<motion.a
+  href="https://wa.me/5491162979241?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20sus%20servicios."
+  target="_blank"
+  rel="noopener noreferrer"
+  className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg z-50 hover:bg-green-600 transition-colors duration-300 flex items-center justify-center"
+  initial={{ scale: 0 }}
+  animate={{ scale: 1 }}
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-7 h-7"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path
+      fillRule="evenodd"
+      d="M12 1.5a10.5 10.5 0 0 0-9.167 15.75L1.5 22.5l5.25-1.333A10.5 10.5 0 1 0 12 1.5Zm-2.344 5.334c.27 0 .5.002.717.012.36.017.534.24.602.48l.468 1.688c.072.26.024.48-.156.668l-.9.94c-.108.108-.144.204-.084.348c.3.72.792 1.308 1.428 1.752c.192.132.372.144.528.048l1.116-.576c.192-.096.36-.072.516.06c.348.3.72.576 1.08.852c.24.192.276.432.156.72c-.144.36-.3.708-.48 1.044c-.144.276-.384.42-.684.396c-.444-.036-.876-.132-1.296-.276c-1.032-.336-1.92-.888-2.64-1.68c-.816-.876-1.416-1.884-1.812-3.012c-.192-.552-.324-1.116-.396-1.692c-.084-.612.036-1.176.48-1.656c.444-.48.984-.732 1.62-.756Z"
+    />
+  </svg>
+</motion.a>
+
 
       {/* Sección Hero */}
       <header className="relative bg-gradient-to-r from-blue-600 to-indigo-700 text-white overflow-hidden">
@@ -202,7 +213,7 @@ function App() {
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-snug text-center sm:text-left">
   Soluciones para
   <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-indigo-200">
-    La transformación Digital de tu empresa
+    la transformación digital de tu empresa
   </span>
 </h1>
 
@@ -435,7 +446,7 @@ function App() {
               </div>
               <div>
                 <h3 className="font-semibold">Teléfono</h3>
-                <p className="text-gray-600">+1 (555) 123-4567</p>
+                <p className="text-gray-600">+5491162979241</p>
               </div>
             </div>
           </motion.div>
@@ -524,7 +535,7 @@ function App() {
             className="flex items-center justify-center space-x-2 mb-4"
             whileHover={{ scale: 1.05 }}
           >
-            <LineChart className="w-6 h-6" />
+             <img src="https://fotoporfolio.s3.us-east-1.amazonaws.com/DDD_1__1_-removebg-preview.png" alt="DataDriven Decisions" className="w-12 h-12" />
             <span className="text-lg font-bold">DataDriven Decisions</span>
           </motion.div>
           <p className="text-gray-400">© 2025 DataDriven Decisions. Todos los derechos reservados.</p>
