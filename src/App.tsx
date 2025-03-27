@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-
+import emailjs from "@emailjs/browser";
 import { 
   LineChart, 
   BarChart3, 
@@ -19,6 +19,9 @@ import {
   Lightbulb,
   ArrowRight
 } from 'lucide-react';
+
+
+
 const services = [
   {
     icon: <Compass className="w-10 h-10 text-blue-600" />,
@@ -100,7 +103,7 @@ function App() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:contact@digitalconsulting.com?subject=Nueva Solicitud de Contacto&body=Nombre: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AMensaje: ${formData.message}`;
+    window.location.href = `mailto:contacto@datadrivendecisions.com.ar?subject=Nueva Solicitud de Contacto&body=Nombre: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0AMensaje: ${formData.message}`;
   };
 
   return (
@@ -394,7 +397,7 @@ function App() {
                 </div>
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">contact@digitalconsulting.com</p>
+                  <p className="text-gray-600">contacto@datadrivendecisions.com.ar</p>
                 </div>
               </div>
               <div className="flex items-center space-x-4">
